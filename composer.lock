@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "30a43f024a94bec44890c52fd6a32e48",
+    "content-hash": "839c609c0df820dd1600de5d0aa55a6f",
     "packages": [
         {
             "name": "brick/math",
@@ -1015,6 +1015,48 @@
                 }
             ],
             "time": "2022-03-20T21:55:58+00:00"
+        },
+        {
+            "name": "jumbojett/openid-connect-php",
+            "version": "v0.9.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jumbojett/OpenID-Connect-PHP.git",
+                "reference": "5b0b423d5db7702012415b9071c41f665e674bf5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jumbojett/OpenID-Connect-PHP/zipball/5b0b423d5db7702012415b9071c41f665e674bf5",
+                "reference": "5b0b423d5db7702012415b9071c41f665e674bf5",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "paragonie/random_compat": ">=2",
+                "php": ">=5.4",
+                "phpseclib/phpseclib": "~2.0 || ^3.0"
+            },
+            "require-dev": {
+                "roave/security-advisories": "dev-master",
+                "yoast/phpunit-polyfills": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "Bare-bones OpenID Connect client",
+            "support": {
+                "issues": "https://github.com/jumbojett/OpenID-Connect-PHP/issues",
+                "source": "https://github.com/jumbojett/OpenID-Connect-PHP/tree/v0.9.6"
+            },
+            "time": "2022-05-08T13:27:57+00:00"
         },
         {
             "name": "laravel/framework",
@@ -8879,5 +8921,5 @@
         "php": "^8.0.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.1.0"
 }

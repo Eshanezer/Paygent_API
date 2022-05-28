@@ -16,6 +16,7 @@ use Jumbojett\OpenIDConnectClient;
 */
 
 Route::get('/', function () {
+    return 123;
     // return view('welcome');
     $clientId = 'gatewayYM';
     $clientSecret = '2yyiWMytitpqKbwbjLsmPvHPTfAUnqTF';

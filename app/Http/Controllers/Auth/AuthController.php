@@ -8,6 +8,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
@@ -65,5 +66,18 @@ class AuthController extends Controller
         ]);
 
         return $this->responseModel->sendJSON(200,  __('auth.APIREGISTER200'), $user);
+    }
+
+    public function userinfo(Request $request)
+    {
+        $respData=Http::withHeaders([
+            'Authorization' => 'Bearer ' . $request->access_token
+        ])->get(config('externalapiroutes.OPENIDAUTHUSERINFO'));
+
+        $data=[];
+
+        User::create($data);
+
+        
     }
 }

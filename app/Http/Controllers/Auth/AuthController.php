@@ -23,19 +23,16 @@ class AuthController extends Controller
         $this->sfdcController=(new SFDCController);
     }
 
-    public function userinfo(Request $request)
+    public function userinfo($token)
     {
-        return $this->sfdcController->getUserData(null);
-
-
         $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . $request->access_token
-        ])->get(config('externalapiroutes.OPENIDAUTHUSERINFO'));
+            'Authorization' => 'Bearer ' . $token
+        ])->get(config('externaApiRoutes.OPENID_AUTH_USER_INFO'));
 
         if ($response->status()==200) {
             $data=[];
             //GET SFDC DATA TOKEN & GET SFDC DATA
-            return $this->sfdcController->getUserData($response->body());
+            return $this->sfdcController->getUserData(json_decode($response->body()));
 
             //CHECK USER EXISTS OR NOT
             //CREATE USER
@@ -45,4 +42,6 @@ class AuthController extends Controller
             return $this->responseModel->sendJSON($response->status(),  json_decode($response->body()));
         }
     }
+
+
 }

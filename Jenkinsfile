@@ -13,6 +13,8 @@ pipeline {
 
                 sh "sudo cp /var/www/do_not_delete/.env.backup ${WORKSPACE}"
                 sh "sudo mv ${WORKSPACE}/.env.backup ${WORKSPACE}/.env"
+
+                sh "sudo chmod -R 777 ${WORKSPACE}/.env"
                 sh "php artisan key:generate"
                 sh "php artisan config:cache"
                 sh "php artisan route:cache"

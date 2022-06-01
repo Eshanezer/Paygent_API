@@ -41,4 +41,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function makeUserDataUsingExternalSources($openid_data,$sdfc_data):array{
+return [];
+    }
 }

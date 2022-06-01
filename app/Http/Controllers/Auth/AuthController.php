@@ -32,7 +32,7 @@ class AuthController extends Controller
         if ($response->status()==200) {
             $data=[];
             //GET SFDC DATA TOKEN & GET SFDC DATA
-            return $this->sfdcController->getUserData($response->body());
+            return $this->sfdcController->getUserData(json_decode($response->body()));
 
             //CHECK USER EXISTS OR NOT
             //CREATE USER

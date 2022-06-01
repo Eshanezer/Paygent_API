@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('t_mkdb_entries', function (Blueprint $table) {
             $table->id();
             $table->integer('year')->nullable();
-            $table->integer('request_no');
+            $table->string('request_no');
             $table->string('entry_type');
             $table->string('mkdb_id_login')->nullable();
             $table->string('club_cd');

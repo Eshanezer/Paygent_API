@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Http;
 
 Route::prefix('/auth')->controller(AuthController::class)->group(function () {
-    Route::get('userinfo', 'userinfo');
+    Route::post('userinfo', 'userinfo');
 });
 
 //remove this after meeting

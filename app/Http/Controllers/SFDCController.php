@@ -14,7 +14,7 @@ class SFDCController extends Controller
     {
         //returns sfdc_token table record
         //includes
-        $response = Http::asForm()->post(config('externalapiroutes.SFDCAUTHTOKEN'), [
+        $response = Http::asForm()->post(config('externaApiRoutes.SFDCAUTHTOKEN'), [
             'username' => env('SFDC_USERNAME'),
             'password' => env('SFDC_PASSWORD'),
             'client_id' => env('SFDC_CLIENTID'),
@@ -42,9 +42,9 @@ class SFDCController extends Controller
 
     public function getUserData($openid_data): array
     {
-        $rawData = ['MKDBID' => $openid_data->mkdb_id, 'Club_CD' => '', 'GroupExport_FLG' => true, 'ContainReservedClubMember_FLG' => true, 'ContainExpiredClubMember_FLG' => false];
+        $rawData = ['MKDBID' => $openid_data->mkdb_id, 'GroupExport_FLG' => true, 'ContainReservedClubMember_FLG' => true, 'ContainExpiredClubMember_FLG' => false];
         $header = ['Content-Type' => 'application/json', 'Request_No' => 'login', 'Authorization' => 'Bearer ' . $this->getNewToken()];
-        $response = Http::withHeaders($header)->withBody(json_encode($rawData), 'application/json')->post(config('externalapiroutes.SFDCREADDATA'));
+        $response = Http::withHeaders($header)->withBody(json_encode($rawData), 'application/json')->post(config('externaApiRoutes.SFDCREADDATA'));
         if ($response->status() == 200) {
             return $response->body();
             return User::makeUserDataUsingExternalSources($openid_data, json_decode($response->body()));

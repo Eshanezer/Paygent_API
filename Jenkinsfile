@@ -6,13 +6,12 @@ pipeline {
                 slackSend channel: 'fanclub-jenkins-alerts', message: 'BUILD START: Job Fanclub-BE'
                 // sh "sudo mv ${WORKSPACE}/.env.prod ${WORKSPACE}/.env"
                 sh "composer install"
-                // sh "php artisan optimize"
                 // sh "sudo php artisan migrate"
                 // sh "sudo php artisan db:seed"
                 sh "sudo chmod -R 777 ${WORKSPACE}"
 
-                sh "sudo cp /var/www/do_not_delete/.env.backup ${WORKSPACE}"
-                sh "sudo mv ${WORKSPACE}/.env.backup ${WORKSPACE}/.env"
+                sh "sudo cp /var/www/do_not_delete/.env.backup ${WORKSPACE}/.env"
+                // sh "sudo mv ${WORKSPACE}/.env.backup ${WORKSPACE}/.env"
 
                 sh "sudo chmod -R 777 ${WORKSPACE}/.env"
                 // sh "php artisan key:generate"

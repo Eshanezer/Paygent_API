@@ -9,9 +9,6 @@ pipeline {
                 // sh "php artisan optimize"
                 // sh "sudo php artisan migrate"
                 // sh "sudo php artisan db:seed"
-                sh "php artisan config:cache"
-                sh "php artisan route:cache"
-                sh "php artisan view:cache"
 
                 sh "sudo chmod -R 777 ${WORKSPACE}"
             }
@@ -25,6 +22,10 @@ pipeline {
                 sh "sudo cp /var/www/do_not_delete/.env.backup /var/www/j-platform"
                 sh "sudo mv /var/www/j-platform/.env.backup /var/www/j-platform/.env"
                 sh "sudo chown -R nginx:nginx /var/www/j-platform"
+                sh "cd /var/www/j-platform"
+                sh "php artisan config:cache"
+                sh "php artisan route:cache"
+                sh "php artisan view:cache"
                 sh "sudo systemctl reload nginx"
             }
         }

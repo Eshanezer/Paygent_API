@@ -14,11 +14,11 @@ pipeline {
 
                 // sh "sudo chmod -R 777 ${WORKSPACE}/.env"
                 // sh "php artisan key:generate"
-                // sh "php artisan config:cache"
-                // sh "php artisan route:cache"
-                // sh "php artisan view:cache"
-                sh "sudo chmod -R 777 ${WORKSPACE}/storage"
-                sh "php artisan optimize:clear"
+                sh "php artisan config:cache"
+                sh "php artisan route:cache"
+                sh "php artisan view:cache"
+                // sh "sudo chmod -R 777 ${WORKSPACE}/storage"
+                // sh "php artisan optimize:clear"
 
             }
         }

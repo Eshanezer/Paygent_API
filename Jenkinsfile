@@ -18,10 +18,12 @@ pipeline {
 
                 sh "sudo rm -rf /var/www/j-platform/*"
                 sh "sudo mkdir -p /var/www/j-platform"
+
+                sh "sudo chown -R nginx:nginx /var/www/j-platform"
+                
                 sh "sudo cp /var/www/do_not_delete/.env.backup ${WORKSPACE}"
                 sh "sudo mv ${WORKSPACE}/.env.backup ${WORKSPACE}/.env"
 
-                // sh "sudo chown -R nginx:nginx /var/www/j-platform"
                 // sh "cd /var/www/j-platform"
                 sh "php artisan key:generate"
                 sh "php artisan config:cache"

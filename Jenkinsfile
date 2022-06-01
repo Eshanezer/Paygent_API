@@ -24,6 +24,7 @@ pipeline {
                 // sh "sudo chown -R nginx:nginx /var/www/j-platform"
                  sh "sudo chmod -R 777 /var/www/j-platform/storage"
                 sh "cd /var/www/j-platform"
+                sh "php artisan key:generate"
                 sh "php artisan config:cache"
                 sh "php artisan route:cache"
                 sh "php artisan view:cache"

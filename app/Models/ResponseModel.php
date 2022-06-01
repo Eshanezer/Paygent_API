@@ -11,6 +11,11 @@ class ResponseModel extends Model
 
     public static function sendJSON($statusCode, $message = null, $data = null)
     {
-        return response()->json(['data' => $data, 'code' => $statusCode, 'message' => $message],$statusCode);
+        $dataResponse=['code' => $statusCode];
+        if($data)
+            $dataResponse['data']=$data;
+        if($message)
+            $dataResponse['message']=$message;
+        return response()->json($dataResponse,$statusCode);
     }
 }

@@ -9,8 +9,15 @@ pipeline {
                 // sh "php artisan optimize"
                 // sh "sudo php artisan migrate"
                 // sh "sudo php artisan db:seed"
-
                 sh "sudo chmod -R 777 ${WORKSPACE}"
+
+                sh "sudo cp /var/www/do_not_delete/.env.backup ${WORKSPACE}"
+                sh "sudo mv ${WORKSPACE}/.env.backup ${WORKSPACE}/.env"
+                sh "php artisan key:generate"
+                sh "php artisan config:cache"
+                sh "php artisan route:cache"
+                sh "php artisan view:cache"
+
             }
         }
         stage("Deploy") {
@@ -18,22 +25,30 @@ pipeline {
 
                 sh "sudo rm -rf /var/www/j-platform/*"
                 sh "sudo mkdir -p /var/www/j-platform"
-
-                sh "sudo chown -R nginx:nginx /var/www/j-platform"
-
-                sh "sudo cp /var/www/do_not_delete/.env.backup ${WORKSPACE}"
-                sh "sudo mv ${WORKSPACE}/.env.backup ${WORKSPACE}/.env"
-
-                sh "sudo chmod -R 777 ${WORKSPACE}/.env"
-                // sh "cd /var/www/j-platform"
-                sh "php artisan key:generate"
-                sh "php artisan config:cache"
-                sh "php artisan route:cache"
-                sh "php artisan view:cache"
-
                 sh "sudo cp -r ${WORKSPACE}/. /var/www/j-platform"
-                sh "sudo chmod -R 777 /var/www/j-platform/storage"
+                sh "sudo chown -R nginx:nginx /var/www/j-platform"
                 sh "sudo systemctl reload nginx"
+
+                // sh "sudo rm -rf /var/www/j-platform/*"
+                // sh "sudo mkdir -p /var/www/j-platform"
+
+                // sh "sudo chown -R nginx:nginx /var/www/j-platform"
+
+                // sh "sudo cp /var/www/do_not_delete/.env.backup ${WORKSPACE}"
+                // sh "sudo mv ${WORKSPACE}/.env.backup ${WORKSPACE}/.env"
+
+                // sh "sudo chmod -R 777 ${WORKSPACE}/.env"
+                // sh "php artisan key:generate"
+                // sh "php artisan config:cache"
+                // sh "php artisan route:cache"
+                // sh "php artisan view:cache"
+
+                // sh "sudo cp -r ${WORKSPACE}/. /var/www/j-platform"
+                // sh "sudo chmod -R 777 /var/www/j-platform/storage"
+                // sh "sudo systemctl reload nginx"
+
+
+
             }
         }
     }

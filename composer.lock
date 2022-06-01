@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "30a43f024a94bec44890c52fd6a32e48",
+    "content-hash": "0c2eb7c6cf7351b51c2c1ccce9c4f69b",
     "packages": [
         {
             "name": "brick/math",
@@ -695,16 +695,16 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "7.4.2",
+            "version": "7.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "ac1ec1cd9b5624694c3a40be801d94137afb12b4"
+                "reference": "74a8602c6faec9ef74b7a9391ac82c5e65b1cdab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/ac1ec1cd9b5624694c3a40be801d94137afb12b4",
-                "reference": "ac1ec1cd9b5624694c3a40be801d94137afb12b4",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/74a8602c6faec9ef74b7a9391ac82c5e65b1cdab",
+                "reference": "74a8602c6faec9ef74b7a9391ac82c5e65b1cdab",
                 "shasum": ""
             },
             "require": {
@@ -799,7 +799,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/guzzle/issues",
-                "source": "https://github.com/guzzle/guzzle/tree/7.4.2"
+                "source": "https://github.com/guzzle/guzzle/tree/7.4.3"
             },
             "funding": [
                 {
@@ -815,7 +815,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-03-20T14:16:28+00:00"
+            "time": "2022-05-25T13:24:33+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -1015,6 +1015,48 @@
                 }
             ],
             "time": "2022-03-20T21:55:58+00:00"
+        },
+        {
+            "name": "jumbojett/openid-connect-php",
+            "version": "v0.9.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jumbojett/OpenID-Connect-PHP.git",
+                "reference": "5b0b423d5db7702012415b9071c41f665e674bf5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jumbojett/OpenID-Connect-PHP/zipball/5b0b423d5db7702012415b9071c41f665e674bf5",
+                "reference": "5b0b423d5db7702012415b9071c41f665e674bf5",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "paragonie/random_compat": ">=2",
+                "php": ">=5.4",
+                "phpseclib/phpseclib": "~2.0 || ^3.0"
+            },
+            "require-dev": {
+                "roave/security-advisories": "dev-master",
+                "yoast/phpunit-polyfills": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "Bare-bones OpenID Connect client",
+            "support": {
+                "issues": "https://github.com/jumbojett/OpenID-Connect-PHP/issues",
+                "source": "https://github.com/jumbojett/OpenID-Connect-PHP/tree/v0.9.6"
+            },
+            "time": "2022-05-08T13:27:57+00:00"
         },
         {
             "name": "laravel/framework",

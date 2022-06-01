@@ -15,6 +15,7 @@ return [
     'API400'=>'Bad request or validation error',
     'API401'=>'Unauthorized',
     'APILOGIN200'=>'Login successful',
+    'APIFETCH200'=>'Ssuccessful',
     'APIREGISTER200'=>'Registration successful',
     'failed' => 'These credentials do not match our records.',
     'password' => 'The provided password is incorrect.',

@@ -3,12 +3,16 @@ pipeline {
      stages {
         stage("Build") {
             steps {
-                slackSend channel: 'fanclub-jenkins-alerts',color: 'FFFF00', message: 'BUILD START: Fanclub BE'
+                slackSend channel: 'fanclub-jenkins-alerts', message: 'BUILD START: Job Fanclub-BE'
                 // sh "sudo mv ${WORKSPACE}/.env.prod ${WORKSPACE}/.env"
                 sh "composer install"
-                sh "php artisan optimize"
+                // sh "php artisan optimize"
                 // sh "sudo php artisan migrate"
                 // sh "sudo php artisan db:seed"
+                sh "php artisan config:cache"
+                sh "php artisan route:cache"
+                sh "php artisan view:cache"
+
                 sh "sudo chmod -R 777 ${WORKSPACE}"
             }
         }
@@ -18,6 +22,8 @@ pipeline {
                 sh "sudo rm -rf /var/www/j-platform/*"
                 sh "sudo mkdir -p /var/www/j-platform"
                 sh "sudo cp -r ${WORKSPACE}/. /var/www/j-platform"
+                sh "sudo cp /var/www/do_not_delete/.env.backup /var/www/j-platform"
+                sh "sudo mv /var/www/j-platform/.env.backup /var/www/j-platform/.env"
                 sh "sudo chown -R nginx:nginx /var/www/j-platform"
                 sh "sudo systemctl reload nginx"
             }
@@ -25,11 +31,11 @@ pipeline {
     }
     post {
         success {
-          slackSend channel: 'fanclub-jenkins-alerts', color: '#00FF00', message: 'SUCCESSFUL: Fanclub BE'
+          slackSend channel: 'fanclub-jenkins-alerts', color: '#00FF00', message: 'SUCCESSFUL: Job Fanclub-BE'
         }
 
         failure {
-          slackSend channel: 'fanclub-jenkins-alerts', color: '#FF0000', message: 'FAILED: Fanclub BE'
+          slackSend channel: 'fanclub-jenkins-alerts', color: '#FF0000', message: 'FAILED: Job Fanclub-BE'
         }
     }
 }

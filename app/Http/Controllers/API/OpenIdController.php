@@ -31,7 +31,7 @@ class OpenIdController extends Controller
     {
         $oauthCredentials =  $this->openIdInterface->getOauthToken($code);
 
-        //openid user data
+        //openid user data 1
         $openIdUserData = $this->getJLeagueUserInfo($oauthCredentials);
         $sfdcUserData = $this->sfdcInterface->getSFDCUserData($openIdUserData['mkdb_id'], $this->sfdcInterface->getSFDCOAuthToken()['access_token'])['Return_Data'][0]['Contact'];
         $this->mkdbInterface->storeUserData([

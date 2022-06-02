@@ -15,10 +15,10 @@ class SFDCRepository implements SFDCInterface
     {
         try {
             return Http::asForm()->post(config('externaApiRoutes.SFDC_AUTH_TOKEN'), [
-                'username' => env('SFDC_USERNAME'),
-                'password' => env('SFDC_PASSWORD'),
-                'client_id' => env('SFDC_CLIENTID'),
-                'client_secret' => env('SFDC_CLIENTSECRET'),
+                'username' => config('sfdcCredentials.SFDC_USERNAME'),
+                'password' => config('sfdcCredentials.SFDC_PASSWORD'),
+                'client_id' => config('sfdcCredentials.SFDC_CLIENTID'),
+                'client_secret' => config('sfdcCredentials.SFDC_CLIENTSECRET'),
                 'grant_type' => 'password'
             ])->json();
         } catch (Exception $e) {

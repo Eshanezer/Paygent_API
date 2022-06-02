@@ -39,7 +39,6 @@ class OpenIdRepository implements OpenIdInterface
         try {
             $access_token = $oauthCredentials['access_token'];
             $jLeagueUserCredentials = Http::withToken($access_token)->get('https://login2.jleague.jp/userinfo')->json();
-            (new SFDCController)->getUserData($jLeagueUserCredentials);
             $data = compact('jLeagueUserCredentials', 'oauthCredentials');
             return $this->successResponse(data:$data);
         } catch (Exception $e) {

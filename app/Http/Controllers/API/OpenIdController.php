@@ -42,7 +42,7 @@ class OpenIdController extends Controller
             'request_no' => 'login',
             'entry_type' => 'non',
             'club_cd' => $jLeagueUserCredentials['club_cd'],
-            'card_type' => 'non',
+            'card_type' => 1,
             'mkdb_id' => $jLeagueUserCredentials['mkdb_id'],
             'post_cd' => $sfdcUserData['POST_CD'],
             'address_state' => $sfdcUserData['ADDRESS_STREET'],

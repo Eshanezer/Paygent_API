@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Repositories;
+
 use App\Interfaces\MKDBInterface;
 use App\Models\t_mkdb_entry;
 

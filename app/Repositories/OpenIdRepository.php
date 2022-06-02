@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Http\Controllers\SFDCController;
 use App\Interfaces\OpenIdInterface;
 use App\Traits\ResponseAPI;
 use Exception;

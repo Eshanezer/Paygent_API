@@ -55,7 +55,7 @@ class OpenIdController extends Controller
             'member_first_nm_kana' => $sfdcUserData['MEMBER_FIRST_NM_KANA'],
             'sex' => $sfdcUserData['SEX'],
             'birthdate' => $sfdcUserData['Birthdate'],
-            'mobilephone' => $sfdcUserData['mkdb_Phoneid'],
+            'mobilephone' => $sfdcUserData['Phone'],
             'email' => $sfdcUserData['Email']
         ]);
         $data = compact('jLeagueUserCredentials', 'oauthCredentials');

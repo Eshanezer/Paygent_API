@@ -7,6 +7,7 @@ use App\Interfaces\MKDBInterface;
 use App\Interfaces\OpenIdInterface;
 use App\Interfaces\SFDCInterface;
 use Illuminate\Http\Request;
+use App\Traits\ResponseAPI;
 
 class OpenIdController extends Controller
 {

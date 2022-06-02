@@ -23,7 +23,7 @@ class OpenIdController extends Controller
 
     public function getOauthToken(string $code){
         $oauthCredentials =  $this->openIdInterface->getOauthToken($code);
-        (new AuthController)->userinfo($oauthCredentials['access_token']);
+        // (new AuthController)->userinfo($oauthCredentials['access_token']);
         return $this->getJLeagueUserInfo($oauthCredentials);
     }
 

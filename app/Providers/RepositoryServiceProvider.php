@@ -3,9 +3,9 @@ namespace App\Providers;
 
 use App\Interfaces\MKDBInterface;
 use App\Interfaces\SFDCInterface;
+use App\Repositories\MKDBRepository;
 use App\Repositories\SFDCRepository;
 use Illuminate\Support\ServiceProvider;
-use MKDBRepository;
 
 class RepositoryServiceProvider extends ServiceProvider {
     public function register()

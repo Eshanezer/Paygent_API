@@ -11,11 +11,12 @@ class SFDCController extends Controller
     protected $SFDCInterface;
     protected $mkdbInterface;
 
-    public function __construct(SFDCInterface $SFDCInterface,MKDBInterface $mkdbInterface)
-    {
-        $this->SFDCInterface = $SFDCInterface;
-        $this->mkdbInterface = $mkdbInterface;
-    }
+
+    // public function __construct(SFDCInterface $SFDCInterface,MKDBInterface $mkdbInterface)
+    // {
+    //     $this->SFDCInterface = $SFDCInterface;
+    //     $this->mkdbInterface = $mkdbInterface;
+    // }
 
     public function getSFDCUserData($mkdb_id){
         return $this->SFDCInterface->getSFDCUserData($mkdb_id,$this->SFDCInterface->getSFDCOAuthToken()['access_token']);

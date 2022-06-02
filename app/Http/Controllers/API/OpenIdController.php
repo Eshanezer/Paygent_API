@@ -32,21 +32,19 @@ class OpenIdController extends Controller
         $oauthCredentials =  $this->openIdInterface->getOauthToken($code);
 
         //openid user data 1
-        $openIdData = $this->getJLeagueUserInfo($oauthCredentials);
-        error_log(json_encode($openIdData));
-        $openIdUserData=$openIdData->jLeagueUserCredentials;
-        $sfdcUserData = $this->sfdcInterface->getSFDCUserData($openIdUserData['mkdb_id'], $this->sfdcInterface->getSFDCOAuthToken()['access_token'])['Return_Data'][0]['Contact'];
+        $jLeagueUserCredentials = $this->getJLeagueUserInfo($oauthCredentials);
+        $sfdcUserData = $this->sfdcInterface->getSFDCUserData($jLeagueUserCredentials['mkdb_id'], $this->sfdcInterface->getSFDCOAuthToken()['access_token'])['Return_Data'][0]['Contact'];
         $this->mkdbInterface->storeUserData([
             'request_no' => 'login',
             'entry_type' => 'non',
-            'club_cd' => $openIdUserData['club_cd'],
+            'club_cd' => $jLeagueUserCredentials['club_cd'],
             'card_type' => 'non',
-            'mkdb_id' => $openIdUserData['mkdb_id'],
+            'mkdb_id' => $jLeagueUserCredentials['mkdb_id'],
             'post_cd' => $sfdcUserData['POST_CD'],
             'address_state' => $sfdcUserData['ADDRESS_STREET'],
             'address_city' => $sfdcUserData['ADDRESS_CITY'],
             'address_street' => $sfdcUserData['ADDRESS_STREET'],
-            'address_building' => $openIdUserData['address_building'],
+            'address_building' => $jLeagueUserCredentials['address_building'],
             'lastname' => $sfdcUserData['FirstName'],
             'firstname' => $sfdcUserData['LastName'],
             'member_last_nm_kana' => $sfdcUserData['MEMBER_LAST_NM_KANA'],
@@ -56,7 +54,8 @@ class OpenIdController extends Controller
             'mobilephone' => $sfdcUserData['mkdb_Phoneid'],
             'email' => $sfdcUserData['Email']
         ]);
-        return $openIdData;
+        $data = compact('jLeagueUserCredentials', 'oauthCredentials');
+        return $this->successResponse(data:$data);
         //end openid user data
     }
 

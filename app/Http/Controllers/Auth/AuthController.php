@@ -37,7 +37,6 @@ class AuthController extends Controller
             //CHECK USER EXISTS OR NOT
             //CREATE USER
             // User::create($data);
-            return $this->responseModel->sendJSON(200,  __('auth.APIFETCH200'), $data);
         } else {
             return $this->responseModel->sendJSON($response->status(),  json_decode($response->body()));
         }

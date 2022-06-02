@@ -35,7 +35,7 @@ return new class extends Migration
             $table->date('birthdate');
             $table->string('homephone')->nullable();
             $table->string('mobilephone')->nullable();
-            $table->string('email');
+            $table->string('email')->unique();
             $table->string('process_type')->nullable();
             $table->string('category_cd')->nullable();
             $table->string('stop_flg')->nullable();

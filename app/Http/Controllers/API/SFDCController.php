@@ -17,7 +17,7 @@ class SFDCController extends Controller
     public function getSFDCUserData(){
         $mkdb_id='0031m00000NhgEkAAJ';
         $code =  $this->SFDCInterface->getSFDCOAuthToken();
-        return $code['access_token'];
+        return $code;
         return $this->SFDCInterface->getSFDCUserData($mkdb_id,$code['access_token']);
     }
 }

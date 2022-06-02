@@ -13,18 +13,13 @@ class SFDCRepository implements SFDCInterface
 
     public function getSFDCOAuthToken()
     {
-
-        try {
-            return Http::asForm()->post(config('externaApiRoutes.SFDC_AUTH_TOKEN'), [
-                'username' => config('sfdcCredentials.SFDC_USERNAME'),
-                'password' => config('sfdcCredentials.SFDC_PASSWORD'),
-                'client_id' => config('sfdcCredentials.SFDC_CLIENTID'),
-                'client_secret' => config('sfdcCredentials.SFDC_CLIENTSECRET'),
-                'grant_type' => 'password'
-            ])->json();
-        } catch (Exception $e) {
-            return $e;
-        }
+        return Http::asForm()->post(config('externaApiRoutes.SFDC_AUTH_TOKEN'), [
+            'username' => config('sfdcCredentials.SFDC_USERNAME'),
+            'password' => config('sfdcCredentials.SFDC_PASSWORD'),
+            'client_id' => config('sfdcCredentials.SFDC_CLIENTID'),
+            'client_secret' => config('sfdcCredentials.SFDC_CLIENTSECRET'),
+            'grant_type' => 'password'
+        ])->json();
     }
 
     public function getSFDCUserData($mkdb_id, $token)

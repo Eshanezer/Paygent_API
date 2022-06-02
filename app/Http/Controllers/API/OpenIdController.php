@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\SFDCController;
 use App\Interfaces\OpenIdInterface;
 use Illuminate\Http\Request;
 
@@ -23,7 +24,6 @@ class OpenIdController extends Controller
 
     public function getOauthToken(string $code){
         $oauthCredentials =  $this->openIdInterface->getOauthToken($code);
-        (new AuthController)->userinfo($oauthCredentials['access_token']);
         return $this->getJLeagueUserInfo($oauthCredentials);
     }
 

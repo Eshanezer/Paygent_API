@@ -34,8 +34,6 @@ class OpenIdController extends Controller
     public function getOauthToken(string $code)
     {
         $oauthCredentials =  $this->openIdInterface->getOauthToken($code);
-
-        //openid user data 1
         $jLeagueUserCredentials = $this->getJLeagueUserInfo($oauthCredentials);
         $sfdcUserData = $this->sfdcInterface->getSFDCUserData($jLeagueUserCredentials['mkdb_id'], $this->sfdcInterface->getSFDCOAuthToken()['access_token'])['Return_Data'][0]['Contact'];
         $user=$this->mkdbInterface->storeUserData([
@@ -58,11 +56,8 @@ class OpenIdController extends Controller
             'mobilephone' => $sfdcUserData['Phone'],
             'email' => $sfdcUserData['Email']
         ]);
-
-        return  $user;
         $data = compact('jLeagueUserCredentials', 'oauthCredentials');
         return $this->successResponse(data:$data);
-        //end openid user data
     }
 
     public function getJLeagueUserInfo($oauthCredentials)

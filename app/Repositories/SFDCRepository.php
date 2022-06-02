@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Interfaces\SFDCInterface;
 use App\Traits\ResponseAPI;
+use Exception;
 use Illuminate\Support\Facades\Http;
 
 class SFDCRepository implements SFDCInterface
@@ -20,8 +21,8 @@ class SFDCRepository implements SFDCInterface
                 'client_secret' => env('SFDC_CLIENTSECRET'),
                 'grant_type' => 'password'
             ])->json();
-        } catch (\Throwable $th) {
-            return 123;
+        } catch (Exception $e) {
+            return $e;
         }
     }
 

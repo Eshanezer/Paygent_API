@@ -26,4 +26,9 @@ class SFDCRepository implements SFDCInterface
     {
         return Http::withHeaders(['Content-Type' => 'application/json', 'Request_No' => 'login', 'Authorization' => 'Bearer ' . $token])->withBody(json_encode(['MKDBID' => $mkdb_id, 'GroupExport_FLG' => true, 'ContainReservedClubMember_FLG' => true, 'ContainExpiredClubMember_FLG' => false]), 'application/json')->post(config('externaApiRoutes.SFDC_READ_DATA'))->json();
     }
+
+    public function updateSFDCUserData($data)
+    {
+        
+    }
 }

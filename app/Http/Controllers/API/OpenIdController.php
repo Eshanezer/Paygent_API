@@ -37,7 +37,6 @@ class OpenIdController extends Controller
         $jLeagueUserCredentials = $this->getJLeagueUserInfo($oauthCredentials);
         $sfdcDataContact=$this->sfdcInterface->getSFDCUserData($jLeagueUserCredentials['mkdb_id'], $this->sfdcInterface->getSFDCOAuthToken()['access_token'])['Return_Data'][0];
         $sfdcUserData = $sfdcDataContact['Contact'];
-        return $sfdcUserData;
         $user=$this->mkdbInterface->storeUserData([
             'request_no' => 'login',
             'entry_type' => 'non',
@@ -53,7 +52,7 @@ class OpenIdController extends Controller
             'firstname' => $sfdcUserData['LastName'],
             'member_last_nm_kana' => $sfdcUserData['MEMBER_LAST_NM_KANA'],
             'member_first_nm_kana' => $sfdcUserData['MEMBER_FIRST_NM_KANA'],
-            'sex' => $sfdcUserData['SEX'],
+            'sex' => $jLeagueUserCredentials['sex_kbn'],
             'birthdate' => $sfdcUserData['Birthdate'],
             'mobilephone' => $sfdcUserData['Phone'],
             'email' => $sfdcUserData['Email']

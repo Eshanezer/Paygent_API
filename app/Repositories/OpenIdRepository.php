@@ -20,14 +20,25 @@ class OpenIdRepository implements OpenIdInterface
 
     public function getOauthToken(string $code)
     {
+        // $oauthCredentials = Http::withBasicAuth(
+        //     'gatewayYM',
+        //     '2yyiWMytitpqKbwbjLsmPvHPTfAUnqTF',
+        // )->withHeaders([
+        //     "Content-Type" => "application/x-www-form-urlencoded",
+        // ])->asForm()->post('https://login2.jleague.jp/oauth/token', [
+        //     'grant_type' => 'authorization_code',
+        //     'redirect_uri' => 'http://fanengage.net/auth/redirect',
+        //     'code' => $code,
+        // ])->json();
+        // return $oauthCredentials;
         $oauthCredentials = Http::withBasicAuth(
-            'gatewayYM',
-            '2yyiWMytitpqKbwbjLsmPvHPTfAUnqTF',
+            config('openIdConfig.client_credentials.yokohama_marinos.client_id'),
+            config('openIdConfig.client_credentials.yokohama_marinos.client_secret'),
         )->withHeaders([
             "Content-Type" => "application/x-www-form-urlencoded",
-        ])->asForm()->post('https://login2.jleague.jp/oauth/token', [
+        ])->asForm()->post(config('openIdConfig.endpoints.get_oauth_token_endpoint'), [
             'grant_type' => 'authorization_code',
-            'redirect_uri' => 'http://fanengage.net/auth/redirect',
+            'redirect_uri' => config('openIdConfig.endpoints.get_login_redirect_endpoint'),
             'code' => $code,
         ])->json();
         return $oauthCredentials;
@@ -40,7 +51,9 @@ class OpenIdRepository implements OpenIdInterface
             // $jLeagueUserCredentials = Http::withToken($access_token)->get('https://login2.jleague.jp/userinfo')->json();
             // $data = compact('jLeagueUserCredentials', 'oauthCredentials');
             // return $this->successResponse(data:$data);
-            return Http::withToken($access_token)->get('https://login2.jleague.jp/userinfo')->json();
+
+            // return Http::withToken($access_token)->get('https://login2.jleague.jp/userinfo')->json();
+            return Http::withToken($access_token)->get(config('openIdConfig.endpoints.get_user_info_endpoint'))->json();
 
         } catch (Exception $e) {
             return $this->errorResponse(message: 'Failed to Login');

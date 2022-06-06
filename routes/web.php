@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    return config('openIdConfig.endpoints.get_oauth_token_endpoint');
     return view('welcome');
 });
 

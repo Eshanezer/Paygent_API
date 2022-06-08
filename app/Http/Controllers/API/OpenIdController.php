@@ -35,10 +35,9 @@ class OpenIdController extends Controller
     {
         $oauthCredentials =  $this->openIdInterface->getOauthToken($code);
         $jLeagueUserCredentials = $this->getJLeagueUserInfo($oauthCredentials);
-        $sfdcUserObject = $this->sfdcInterface->getSFDCUserData($jLeagueUserCredentials['mkdb_id'], $this->sfdcInterface->getSFDCOAuthToken()['access_token'])['Return_Data'][0];
-        $link_type = ($sfdcUserObject['ClubMember']) ? 2 : 1;
-        $sfdcUserData = $sfdcUserObject['Contact'];
-        $user = $this->mkdbInterface->storeUserData([
+        $sfdcDataContact=$this->sfdcInterface->getSFDCUserData($jLeagueUserCredentials['mkdb_id'], $this->sfdcInterface->getSFDCOAuthToken()['access_token'])['Return_Data'][0];
+        $sfdcUserData = $sfdcDataContact['Contact'];
+        $user=$this->mkdbInterface->storeUserData([
             'request_no' => 'login',
             'entry_type' => 'non',
             'club_cd' => $jLeagueUserCredentials['club_cd'],
@@ -53,7 +52,7 @@ class OpenIdController extends Controller
             'firstname' => $sfdcUserData['LastName'],
             'member_last_nm_kana' => $sfdcUserData['MEMBER_LAST_NM_KANA'],
             'member_first_nm_kana' => $sfdcUserData['MEMBER_FIRST_NM_KANA'],
-            'sex' => $sfdcUserData['SEX'],
+            'sex' => $jLeagueUserCredentials['sex_kbn'],
             'birthdate' => $sfdcUserData['Birthdate'],
             'mobilephone' => $sfdcUserData['Phone'],
             'email' => $sfdcUserData['Email']

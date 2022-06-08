@@ -59,4 +59,14 @@ class OpenIdRepository implements OpenIdInterface
             return $this->errorResponse(message: 'Failed to Login');
         }
     }
+
+    public function updateJLeagueUserInfo($token)
+    {
+        // try {
+        //     return Http::withToken($token)->get('https://login2.jleague.jp/userinfo')->json();
+
+        // } catch (Exception $e) {
+        //     return $this->errorResponse(message: 'Failed to Login');
+        // }
+    }
 }

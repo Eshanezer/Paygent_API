@@ -7,6 +7,7 @@ interface OpenIdInterface {
     public function getOpenIdCode(Request $request);
     public function getOauthToken(string $code);
     public function getJLeagueUserInfo($oauthCredentials);
+    public function updateJLeagueUserInfo($token);
 }
 
 

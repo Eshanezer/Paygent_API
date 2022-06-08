@@ -35,28 +35,27 @@ class OpenIdController extends Controller
     {
         $oauthCredentials =  $this->openIdInterface->getOauthToken($code);
         $jLeagueUserCredentials = $this->getJLeagueUserInfo($oauthCredentials);
-        $sfdcDataContact=$this->sfdcInterface->getSFDCUserData($jLeagueUserCredentials['mkdb_id'], $this->sfdcInterface->getSFDCOAuthToken()['access_token'])['Return_Data'][0];
-        $sfdcUserData = $sfdcDataContact['Contact'];
-        $link_type = ($sfdcDataContact['ClubMember'])?1:2;
-        $user=$this->mkdbInterface->storeUserData([
+        $sfdcDataContact = $this->sfdcInterface->getSFDCUserData($jLeagueUserCredentials['mkdb_id'], $this->sfdcInterface->getSFDCOAuthToken()['access_token'])['Return_Data'][0];
+        $link_type = ($sfdcDataContact['ClubMember']) ? 1 : 2;
+        $user = $this->mkdbInterface->storeUserData([
             'request_no' => 'login',
             'entry_type' => 'non',
             'club_cd' => $jLeagueUserCredentials['club_cd'],
             'card_type' => 1,
             'mkdb_id' => $jLeagueUserCredentials['mkdb_id'],
-            'post_cd' => $sfdcUserData['POST_CD'],
-            'address_state' => $sfdcUserData['ADDRESS_STREET'],
-            'address_city' => $sfdcUserData['ADDRESS_CITY'],
-            'address_street' => $sfdcUserData['ADDRESS_STREET'],
+            'post_cd' => $jLeagueUserCredentials['post_cd1'],
+            'address_state' => $jLeagueUserCredentials['address_state'],
+            'address_city' => $jLeagueUserCredentials['address_city'],
+            'address_street' => $jLeagueUserCredentials['address_street'],
             'address_building' => $jLeagueUserCredentials['address_building'],
-            'lastname' => $sfdcUserData['FirstName'],
-            'firstname' => $sfdcUserData['LastName'],
-            'member_last_nm_kana' => $sfdcUserData['MEMBER_LAST_NM_KANA'],
-            'member_first_nm_kana' => $sfdcUserData['MEMBER_FIRST_NM_KANA'],
+            'lastname' => $jLeagueUserCredentials['member_last_nm'],
+            'firstname' => $jLeagueUserCredentials['member_first_nm'],
+            'member_last_nm_kana' => $jLeagueUserCredentials['member_last_nm_lana'],
+            'member_first_nm_kana' => $jLeagueUserCredentials['member_first_nm_kana'],
             'sex' => $jLeagueUserCredentials['sex_kbn'],
-            'birthdate' => $sfdcUserData['Birthdate'],
-            'mobilephone' => $sfdcUserData['Phone'],
-            'email' => $sfdcUserData['Email']
+            'birthdate' => $jLeagueUserCredentials['birthday_ymd'],
+            'mobilephone' => $jLeagueUserCredentials['tel_no_fixed'],
+            'email' => $jLeagueUserCredentials['email']
         ]);
         $data = compact('jLeagueUserCredentials', 'oauthCredentials', 'link_type');
         return $this->successResponse(data: $data);

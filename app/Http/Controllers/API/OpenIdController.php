@@ -35,12 +35,10 @@ class OpenIdController extends Controller
     {
         $oauthCredentials =  $this->openIdInterface->getOauthToken($code);
         $jLeagueUserCredentials = $this->getJLeagueUserInfo($oauthCredentials);
-
-        return $this->sfdcInterface->getSFDCOAuthToken();
-
-        $sfdcUserData = $this->sfdcInterface->getSFDCUserData($jLeagueUserCredentials['mkdb_id'], $this->sfdcInterface->getSFDCOAuthToken()['access_token'])['Return_Data'][0]['Contact'];
-
-        $user=$this->mkdbInterface->storeUserData([
+        $sfdcUserObject = $this->sfdcInterface->getSFDCUserData($jLeagueUserCredentials['mkdb_id'], $this->sfdcInterface->getSFDCOAuthToken()['access_token'])['Return_Data'][0];
+        $link_type = ($sfdcUserObject['ClubMember']) ? 2 : 1;
+        $sfdcUserData = $sfdcUserObject['Contact'];
+        $user = $this->mkdbInterface->storeUserData([
             'request_no' => 'login',
             'entry_type' => 'non',
             'club_cd' => $jLeagueUserCredentials['club_cd'],
@@ -60,8 +58,8 @@ class OpenIdController extends Controller
             'mobilephone' => $sfdcUserData['Phone'],
             'email' => $sfdcUserData['Email']
         ]);
-        $data = compact('jLeagueUserCredentials', 'oauthCredentials');
-        return $this->successResponse(data:$data);
+        $data = compact('jLeagueUserCredentials', 'oauthCredentials', 'link_type');
+        return $this->successResponse(data: $data);
     }
 
     public function getJLeagueUserInfo($oauthCredentials)
@@ -69,7 +67,7 @@ class OpenIdController extends Controller
         return $this->openIdInterface->getJLeagueUserInfo($oauthCredentials);
     }
 
-    public function updateJLeagueUserInfo(Request $request){
-
+    public function updateJLeagueUserInfo(Request $request)
+    {
     }
 }

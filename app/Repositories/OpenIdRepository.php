@@ -37,13 +37,20 @@ class OpenIdRepository implements OpenIdInterface
     {
         try {
             $access_token = $oauthCredentials['access_token'];
-            // $jLeagueUserCredentials = Http::withToken($access_token)->get('https://login2.jleague.jp/userinfo')->json();
-            // $data = compact('jLeagueUserCredentials', 'oauthCredentials');
-            // return $this->successResponse(data:$data);
             return Http::withToken($access_token)->get('https://login2.jleague.jp/userinfo')->json();
 
         } catch (Exception $e) {
             return $this->errorResponse(message: 'Failed to Login');
         }
+    }
+
+    public function updateJLeagueUserInfo($token)
+    {
+        // try {
+        //     return Http::withToken($token)->get('https://login2.jleague.jp/userinfo')->json();
+
+        // } catch (Exception $e) {
+        //     return $this->errorResponse(message: 'Failed to Login');
+        // }
     }
 }

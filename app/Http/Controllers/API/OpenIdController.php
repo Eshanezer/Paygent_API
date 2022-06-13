@@ -35,6 +35,7 @@ class OpenIdController extends Controller
     {
         $oauthCredentials =  $this->openIdInterface->getOauthToken($code);
         $jLeagueUserCredentials = $this->getJLeagueUserInfo($oauthCredentials);
+        \Log::info($jLeagueUserCredentials);
         $sfdcDataContact=$this->sfdcInterface->getSFDCUserData($jLeagueUserCredentials['mkdb_id'], $this->sfdcInterface->getSFDCOAuthToken()['access_token'])['Return_Data'][0];
         $sfdcUserData = $sfdcDataContact['Contact'];
         $link_type = ($sfdcDataContact['ClubMember'])?1:2;

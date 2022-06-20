@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\API\BetyController;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,14 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    Log::info(123);
     return view('welcome');
 });
+Route::get('/js', function () {
+    return view('js-payment');
+});
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
-
-Route::get('/test',[BetyController::class,'testPurchaseStart']);
+Route::get('/php', function () {
+    
+});
